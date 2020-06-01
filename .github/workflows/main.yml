@@ -21,15 +21,11 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
-    # Runs a single command using the runners shell
-    - name: Install NodeJS
+    - name: Setup node
       uses: actions/setup-node@v2-beta
       with:
-        node-version: 12  
-#Runs a set of commands
-        name: Installing surge
-        run: npm install --global surge
-    name: deploying using surge
-  run: surge ./ piaicbootcamp2020.surge.sh --token ${{secrets.SURGE_TOKEN}}
-  
+        node-version: '12'
+    - name: setup surge
+      run: npm install --global surge
+    - name: Execute Deployment with surge
+      run: surge ./ piaicbootcamp_1.surge.sh --token ${{ secrets.SURGE_TOKEN}} 
